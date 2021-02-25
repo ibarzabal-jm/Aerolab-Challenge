@@ -1,7 +1,26 @@
-import React from "react";
-import { Button, Stack, Image } from "@chakra-ui/react";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+
+import { Stack, Image, Text, Icon, Button } from "@chakra-ui/react";
+import { RepeatClockIcon } from "@chakra-ui/icons";
+
+import { api } from "../../api/api";
+import { UserContext } from "../../context/UserContext";
+
+import ModalCoins from "./ModalCoins";
 
 const Navbar = () => {
+  const { user, setUser } = useContext(UserContext);
+
+  const handleAddCoins = ({ target }) => {
+    const value = parseInt(target.value);
+    if (!isNaN(value)) {
+      api
+        .addPoints(value)
+        .then((res) => setUser({ ...user, points: res["New Points"] }));
+    }
+  };
+
   return (
     <Stack
       as="nav"
@@ -10,17 +29,23 @@ const Navbar = () => {
       height="80px"
       justifyContent="space-between"
       bg="white"
-      zIndex={200}
     >
-      <Image src="../assets/aerolab-logo.svg" ml={8} />
-
-      <Stack isInline mr={8}>
-        <Button size="md" variant="link">
-          Usuario
+      <Link to="/home">
+        <Image src="../assets/logo.svg" ml={8} />
+      </Link>
+      <Stack isInline mr={8} align="center" justifyContent="center">
+        <Text
+          fontSize="24px"
+          color="#616161"
+          letterSpacing="-0.15px"
+          lineHeight="48px"
+        >
+          {user.name}
+        </Text>
+        <Button variant="link" as={Link} to="/redeems">
+          <Icon as={RepeatClockIcon} color="secondary" height={10} width={10} />
         </Button>
-        <Button size="md" rounded={999}>
-          coins
-        </Button>
+        <ModalCoins handleAddCoins={handleAddCoins} userPoints={user.points} />
       </Stack>
     </Stack>
   );
