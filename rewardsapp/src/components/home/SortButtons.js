@@ -4,7 +4,9 @@ import { Stack, Text, Button } from "@chakra-ui/react";
 const SortButtons = ({ sortSelected, handleChange }) => {
   return (
     <Stack isInline>
-      <Text alignSelf="center"> Sort By:</Text>
+      <Text display={{ base: "none", md: "block" }} alignSelf="center">
+        Sort By:
+      </Text>
 
       <Button
         bg={sortSelected === "recent" ? "primary" : "#ededed"}
