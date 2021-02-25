@@ -25,8 +25,8 @@ const Redeems = () => {
           History
         </Heading>
       </Flex>
-      <Stack padding={2}>
-        <SimpleGrid columns={{ base: 2, xl: 3 }} gap={2}>
+      <Stack padding={4}>
+        <SimpleGrid columns={{ base: 1, sm: 2, xl: 3 }} gap={2}>
           {user.redeemHistory
             ?.slice(0)
             .reverse()
