@@ -1,7 +1,8 @@
 import React from "react";
-import { Stack, Text, Button } from "@chakra-ui/react";
+import { Stack, Text, Button, useBreakpointValue } from "@chakra-ui/react";
 
 const SortButtons = ({ sortSelected, handleChange }) => {
+  const text = useBreakpointValue({ base: "", md: "Price" });
   return (
     <Stack isInline>
       <Text display={{ base: "none", md: "block" }} alignSelf="center">
@@ -24,7 +25,7 @@ const SortButtons = ({ sortSelected, handleChange }) => {
         _hover={{ backgroundColor: "secondary", color: "white" }}
         onClick={() => handleChange("lowest")}
       >
-        Lowest Price
+        Lowest {text}
       </Button>
       <Button
         bg={sortSelected === "highest" ? "primary" : "#ededed"}
@@ -33,7 +34,7 @@ const SortButtons = ({ sortSelected, handleChange }) => {
         _hover={{ backgroundColor: "secondary", color: "white" }}
         onClick={() => handleChange("highest")}
       >
-        Highest Price
+        Highest {text}
       </Button>
     </Stack>
   );
