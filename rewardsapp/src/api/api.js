@@ -4,8 +4,8 @@ const PERSONAL_TOKEN =
 
 const HEADER = {
   "Content-Type": "application/json",
-  Accept: "appliaction/json",
-  Authorization: `Bearer ${PERSONAL_TOKEN}`,
+  Accept: "application/json",
+  Authorization: "Bearer " + PERSONAL_TOKEN,
 };
 
 export const api = {
@@ -20,6 +20,34 @@ export const api = {
   getProducts: async () => {
     return fetch(BASE_URL + "products", {
       method: "GET",
+      headers: HEADER,
+    })
+      .then((res) => res.json())
+      .catch((error) => console.log(error));
+  },
+  getHistory: async () => {
+    return fetch(BASE_URL + "user/history", {
+      method: "GET",
+      headers: HEADER,
+    })
+      .then((res) => res.json())
+      .catch((error) => console.log(error));
+  },
+  redeem: async (idProduct) => {
+    return fetch(BASE_URL + "redeem", {
+      body: JSON.stringify({ productId: idProduct }),
+      method: "POST",
+      headers: HEADER,
+    })
+      .then((res) => res.json())
+      .catch((error) => console.log(error));
+  },
+  addPoints: async (pointsToAdd) => {
+    return fetch(BASE_URL + "user/points", {
+      method: "POST",
+      body: JSON.stringify({
+        amount: pointsToAdd,
+      }),
       headers: HEADER,
     })
       .then((res) => res.json())
