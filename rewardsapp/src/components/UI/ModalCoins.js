@@ -21,7 +21,7 @@ const ModalCoins = ({ userPoints, handleAddCoins }) => {
       <PopoverTrigger>
         <Button rounded={99} height="48px" onClick={open}>
           <Text
-            fontSize="24px"
+            fontSize="xl"
             color="#616161"
             letterSpacing="-0.15px"
             lineHeight="48px"
