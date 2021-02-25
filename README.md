@@ -1,8 +1,12 @@
-![Aerolab](./src/assets/logo.svg "Aerolab")
+[![Netlify Status](https://api.netlify.com/api/v1/badges/76c482bb-2bc4-4a46-8cc0-af3f193c9b40/deploy-status)](https://app.netlify.com/sites/juanma-aerolab/deploys)
+![Aerolab](./rewardsapp/public/assets/logo.svg "Aerolab")
 
 # Aerolab challenge
 
 Se debe crear una tienda de productos basada en puntos.
+
+# [Demo](https://juanma-aerolab.netlify.app/home)
+
 
 # API
 
