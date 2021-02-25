@@ -22,27 +22,37 @@ const ProductList = () => {
   };
 
   return (
-    <Stack padding={8} spacing={10} textAlign="center">
-      <Stack isInline>
+    <Stack padding={8} spacing={3} textAlign="center">
+      <Stack direction={{ base: "column", md: "row" }}>
         <Text alignSelf="center"> 16 of 32 products</Text>
+        <Divider
+          orientation="vertical"
+          color="black"
+          colorScheme="gray"
+          size="5px"
+          variant="solid"
+        />
         <SortButtons
           sortSelected={sortSelected}
           handleChange={handleSortChange}
         />
       </Stack>
-      <Divider />
+      <Divider variant="solid" />
 
-      <SimpleGrid
-        columns={{ base: 1, sm: 2, md: 3, xl: 4 }}
-        gap={8}
-        alignSelf="center"
-      >
-        {products?.map((product) => (
-          <ProductCard product={product} key={product._id} />
-        ))}
-      </SimpleGrid>
+      <Stack>
+        <SimpleGrid
+          marginTop={4}
+          columns={{ base: 1, sm: 2, md: 3, xl: 4 }}
+          gap={8}
+          alignSelf="center"
+        >
+          {products?.map((product) => (
+            <ProductCard product={product} key={product._id} />
+          ))}
+        </SimpleGrid>
+      </Stack>
 
-      <Divider />
+      <Divider variant="solid" />
       <Stack isInline justify="space-between">
         <Text alignSelf="center"> 16 of 32 products</Text>
       </Stack>
