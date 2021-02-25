@@ -31,11 +31,11 @@ const Navbar = () => {
       bg="white"
     >
       <Link to="/home">
-        <Image src="../assets/logo.svg" ml={8} />
+        <Image src="../assets/logo.svg" ml={4} />
       </Link>
-      <Stack isInline mr={8} align="center" justifyContent="center">
+      <Stack isInline align="center" justify="center" mr={4}>
         <Text
-          fontSize="24px"
+          fontSize="xl"
           color="#616161"
           letterSpacing="-0.15px"
           lineHeight="48px"
