@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Divider, SimpleGrid, Stack, Text, Image } from "@chakra-ui/react";
-import { api } from "../../api/api";
+import { Divider, Grid, Stack, Text, Image } from "@chakra-ui/react";
 import { getSort } from "../../helpers/getSort";
 import { motion } from "framer-motion";
 
@@ -8,23 +7,18 @@ import SortButtons from "./SortButtons";
 import ProductCard from "../products/ProductCard";
 
 const PAGE_SIZE = 16;
-const ProductList = () => {
-  const [products, setProducts] = useState([]);
+const ProductList = ({ products }) => {
   const [page, setPage] = useState(1);
+  const [sortedProducts, setSortedProducts] = useState(products);
   const [sortSelected, setSortSelected] = useState("recent");
 
   useEffect(() => {
-    if (products.length === 0) {
-      api
-        .getProducts()
-        .then((productos) => setProducts(getSort(productos, sortSelected)));
-    }
-  }, [sortSelected, products.length]);
+    setPage(1);
+    setSortedProducts(getSort(products, sortSelected));
+  }, [sortSelected, products]);
 
   const handleSortChange = (sortMethod) => {
-    setPage(1);
     setSortSelected(sortMethod);
-    setProducts(getSort(products, sortMethod));
   };
 
   return (
@@ -67,14 +61,13 @@ const ProductList = () => {
       </Stack>
       <Divider variant="solid" />
 
-      <Stack>
-        <SimpleGrid
-          marginTop={4}
-          columns={{ base: 1, sm: 2, md: 3, xl: 4 }}
-          gap={8}
-          alignSelf="center"
+      <Stack justifyContent="center">
+        <Grid
+          gap={4}
+          templateColumns="repeat(auto-fill, minmax(256px, 1fr))"
+          width="100%"
         >
-          {products
+          {sortedProducts
             ?.slice((page - 1) * PAGE_SIZE, PAGE_SIZE * page)
             .map((product, index) => (
               <motion.div
@@ -96,7 +89,7 @@ const ProductList = () => {
                 <ProductCard product={product} key={product._id} />
               </motion.div>
             ))}
-        </SimpleGrid>
+        </Grid>
       </Stack>
 
       <Divider variant="solid" />
