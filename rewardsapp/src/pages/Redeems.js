@@ -1,12 +1,5 @@
 import React, { useContext } from "react";
-import {
-  Stack,
-  Heading,
-  Text,
-  Flex,
-  SimpleGrid,
-  Image,
-} from "@chakra-ui/react";
+import { Stack, Heading, Text, Flex, Image, Grid } from "@chakra-ui/react";
 import { UserContext } from "../context/UserContext";
 
 const Redeems = () => {
@@ -26,7 +19,11 @@ const Redeems = () => {
         </Heading>
       </Flex>
       <Stack padding={4}>
-        <SimpleGrid columns={{ base: 1, sm: 2, xl: 3 }} gap={2}>
+        <Grid
+          gap={4}
+          templateColumns="repeat(auto-fill, minmax(400px, 1fr))"
+          width="100%"
+        >
           {user.redeemHistory
             ?.slice(0)
             .reverse()
@@ -35,13 +32,17 @@ const Redeems = () => {
               return (
                 <Stack
                   border="2px"
-                  borderColor="primary"
+                  borderColor="secondary"
                   isInline
                   alignItems="center"
                   key={product.createDate}
                 >
                   <Stack>
-                    <Image alt={product.name} src={product.img.hdUrl}></Image>
+                    <Image
+                      alt={product.name}
+                      src={product.img.hdUrl}
+                      w="300px"
+                    ></Image>
                   </Stack>
                   <Stack w="100%" justify="center" spacing={0}>
                     <Text color="#a3a3a3" fontWeight="bold">
@@ -50,14 +51,20 @@ const Redeems = () => {
                     <Text fontWeight="bold">{product.name}</Text>
                     <Text>Date: {date.toLocaleDateString("es-ar")}</Text>
                   </Stack>
-                  <Stack w="100%" justify="center" spacing={0} isInline>
+                  <Stack
+                    w="100%"
+                    justify="center"
+                    align="center"
+                    spacing={0}
+                    isInline
+                  >
                     <Text align="center">{product.cost}</Text>
-                    <Image src="../assets/icons/coin.svg" w={8} h={8} />
+                    <Image src="../assets/icons/coin.svg" />
                   </Stack>
                 </Stack>
               );
             })}
-        </SimpleGrid>
+        </Grid>
       </Stack>
     </Stack>
   );
