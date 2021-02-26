@@ -61,36 +61,35 @@ const ProductList = ({ products }) => {
       </Stack>
       <Divider variant="solid" />
 
-      <Stack justifyContent="center">
-        <Grid
-          gap={4}
-          templateColumns="repeat(auto-fill, minmax(256px, 1fr))"
-          width="100%"
-        >
-          {sortedProducts
-            ?.slice((page - 1) * PAGE_SIZE, PAGE_SIZE * page)
-            .map((product, index) => (
-              <motion.div
-                animate="visible"
-                key={product._id}
-                custom={index}
-                initial="hidden"
-                variants={{
-                  hidden: { opacity: 0, y: 150 },
-                  visible: (index) => ({
-                    opacity: 1,
-                    y: 0,
-                    transition: {
-                      delay: index * 0.09,
-                    },
-                  }),
-                }}
-              >
-                <ProductCard product={product} key={product._id} />
-              </motion.div>
-            ))}
-        </Grid>
-      </Stack>
+      <Grid
+        gap={3}
+        templateColumns="repeat(auto-fill, minmax(276px, 1fr))"
+        width="100%"
+        justifyItems="center"
+      >
+        {sortedProducts
+          ?.slice((page - 1) * PAGE_SIZE, PAGE_SIZE * page)
+          .map((product, index) => (
+            <motion.div
+              animate="visible"
+              key={product._id}
+              custom={index}
+              initial="hidden"
+              variants={{
+                hidden: { opacity: 0, y: 150 },
+                visible: (index) => ({
+                  opacity: 1,
+                  y: 0,
+                  transition: {
+                    delay: index * 0.09,
+                  },
+                }),
+              }}
+            >
+              <ProductCard product={product} key={product._id} />
+            </motion.div>
+          ))}
+      </Grid>
 
       <Divider variant="solid" />
       <Stack isInline justify="space-between">
