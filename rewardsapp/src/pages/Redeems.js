@@ -21,7 +21,7 @@ const Redeems = () => {
       <Stack padding={4}>
         <Grid
           gap={4}
-          templateColumns="repeat(auto-fill, minmax(400px, 1fr))"
+          templateColumns="repeat(auto-fill, minmax(320px, 1fr))"
           width="100%"
         >
           {user.redeemHistory
