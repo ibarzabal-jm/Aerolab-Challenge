@@ -13,7 +13,6 @@ const SortButtons = ({ sortSelected, handleChange }) => {
         bg={sortSelected === "recent" ? "primary" : "#ededed"}
         color={sortSelected === "recent" ? "white" : "#a3a3a3"}
         rounded={999}
-        _hover={{ backgroundColor: "secondary", color: "white" }}
         onClick={() => handleChange("recent")}
       >
         Most Recent
@@ -22,7 +21,6 @@ const SortButtons = ({ sortSelected, handleChange }) => {
         bg={sortSelected === "lowest" ? "primary" : "#ededed"}
         color={sortSelected === "lowest" ? "white" : "#a3a3a3"}
         rounded={999}
-        _hover={{ backgroundColor: "secondary", color: "white" }}
         onClick={() => handleChange("lowest")}
       >
         Lowest {text}
@@ -31,7 +29,6 @@ const SortButtons = ({ sortSelected, handleChange }) => {
         bg={sortSelected === "highest" ? "primary" : "#ededed"}
         color={sortSelected === "highest" ? "white" : "#a3a3a3"}
         rounded={999}
-        _hover={{ backgroundColor: "secondary", color: "white" }}
         onClick={() => handleChange("highest")}
       >
         Highest {text}
