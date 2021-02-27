@@ -1,30 +1,28 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Stack, Image, Button, Text } from "@chakra-ui/react";
-import { UserContext } from "../../context/UserContext";
-import { api } from "../../api/api";
+
+import { usePoints } from "../../hooks/usePoints";
 import Swal from "sweetalert2";
 
 const ProductHover = ({ id, cost }) => {
-  const { setUser } = useContext(UserContext);
+  const { redeem, loading } = usePoints();
 
   const redeemProduct = () => {
-    api.redeem(id).then(({ message, error }) => {
-      if (message) {
-        api.getUser().then((user) => setUser(user));
+    if (!loading) {
+      redeem(id, cost).then(() => {
         Swal.fire({
           icon: "success",
-          title: "Product Buy !",
-          text: message,
+          title: "Product Buy!",
+          text: "Wiiiii",
         });
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Crap...",
-          text: error,
-          footer: "Report with me",
-        });
-      }
-    });
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Crap...",
+        text: "You can't redeem now",
+      });
+    }
   };
 
   return (
@@ -34,9 +32,9 @@ const ProductHover = ({ id, cost }) => {
       left="0"
       bgGradient="linear(to-b, #0ad4faCC 0%, #25bbf1CC 100%)"
       height="100%"
-      rounded={4}
       opacity={0}
       padding={2.5}
+      rounded={4}
       spacing={4}
       width="100%"
       zIndex={200}
