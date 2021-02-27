@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Divider, Grid, Stack, Text, Image } from "@chakra-ui/react";
-import { getSort } from "../../helpers/getSort";
+import { motion } from "framer-motion";
 
 import SortButtons from "./SortButtons";
 import ProductCard from "../products/ProductCard";
+
+import { getSort } from "../../helpers/getSort";
 
 const ProductList = ({ products, productsPerPage }) => {
   const [page, setPage] = useState(1);
@@ -68,7 +70,24 @@ const ProductList = ({ products, productsPerPage }) => {
         {sortedProducts
           ?.slice((page - 1) * productsPerPage, productsPerPage * page)
           .map((product, index) => (
-            <ProductCard product={product} key={product._id} />
+            <motion.div
+              animate="visible"
+              key={product._id}
+              custom={index}
+              initial="hidden"
+              variants={{
+                hidden: { opacity: 0, y: 150 },
+                visible: (index) => ({
+                  opacity: 1,
+                  y: 0,
+                  transition: {
+                    delay: index * 0.06,
+                  },
+                }),
+              }}
+            >
+              <ProductCard product={product} key={product._id} />
+            </motion.div>
           ))}
       </Grid>
 
