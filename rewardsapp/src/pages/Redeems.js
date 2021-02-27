@@ -37,12 +37,12 @@ const Redeems = () => {
                   alignItems="center"
                   key={product.createDate}
                 >
-                  <Stack h="100%">
+                  <Stack h="100%" bg="white">
                     <Image
                       alt={product.name}
                       src={product.img.hdUrl}
                       w="300px"
-                      objectFit="cover"
+                      objectFit="contain"
                       h="100%"
                     ></Image>
                   </Stack>
