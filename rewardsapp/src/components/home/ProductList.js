@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Divider, Grid, Stack, Text, Image } from "@chakra-ui/react";
 import { getSort } from "../../helpers/getSort";
-import { motion } from "framer-motion";
 
 import SortButtons from "./SortButtons";
 import ProductCard from "../products/ProductCard";
 
-const PAGE_SIZE = 16;
-const ProductList = ({ products }) => {
+const ProductList = ({ products, productsPerPage }) => {
   const [page, setPage] = useState(1);
   const [sortedProducts, setSortedProducts] = useState(products);
   const [sortSelected, setSortSelected] = useState("recent");
@@ -22,43 +20,43 @@ const ProductList = ({ products }) => {
   };
 
   return (
-    <Stack padding={8} spacing={3} textAlign="center">
+    <Stack padding={4} spacing={3}>
       <Stack
-        direction={{ base: "column", md: "row" }}
-        justify="space-between"
+        alignItems="center"
         align="center"
+        as="nav"
+        justify="space-between"
+        direction={{ base: "column", sm: "row" }}
       >
-        <Stack direction={{ base: "column", md: "row" }}>
-          <Text alignSelf="center">
-            {page * PAGE_SIZE} of {products.length} products
+        <Stack isInline align="center">
+          <Text color="gray.700" fontWeight="semibold">
+            {page * productsPerPage} of {products.length} products
           </Text>
-          <Divider
-            orientation="vertical"
-            color="black"
-            colorScheme="gray"
-            size="5px"
-            variant="solid"
-          />
+          <Divider orientation="vertical" />
           <SortButtons
             sortSelected={sortSelected}
             handleChange={handleSortChange}
           />
         </Stack>
-        <Stack isInline>
-          <Image
-            cursor="pointer"
-            src="../assets/icons/arrow-right.svg"
-            onClick={() => setPage((p) => p + 1)}
-            display={PAGE_SIZE === products.length / page && "none"}
-          />
-          <Image
-            cursor="pointer"
-            src="../assets/icons/arrow-left.svg"
-            onClick={() => setPage((p) => p - 1)}
-            display={page === 1 && "none"}
-          />
+
+        <Stack display={{ base: "none", sm: "flex" }}>
+          {page !== 1 && (
+            <Image
+              cursor="pointer"
+              src="../assets/icons/arrow-left.svg"
+              onClick={() => setPage((p) => p - 1)}
+            />
+          )}
+          {productsPerPage !== products.length / page && (
+            <Image
+              cursor="pointer"
+              src="../assets/icons/arrow-right.svg"
+              onClick={() => setPage((p) => p + 1)}
+            />
+          )}
         </Stack>
       </Stack>
+
       <Divider variant="solid" />
 
       <Grid
@@ -68,48 +66,33 @@ const ProductList = ({ products }) => {
         justifyItems="center"
       >
         {sortedProducts
-          ?.slice((page - 1) * PAGE_SIZE, PAGE_SIZE * page)
+          ?.slice((page - 1) * productsPerPage, productsPerPage * page)
           .map((product, index) => (
-            <motion.div
-              animate="visible"
-              key={product._id}
-              custom={index}
-              initial="hidden"
-              variants={{
-                hidden: { opacity: 0, y: 150 },
-                visible: (index) => ({
-                  opacity: 1,
-                  y: 0,
-                  transition: {
-                    delay: index * 0.09,
-                  },
-                }),
-              }}
-            >
-              <ProductCard product={product} key={product._id} />
-            </motion.div>
+            <ProductCard product={product} key={product._id} />
           ))}
       </Grid>
 
       <Divider variant="solid" />
-      <Stack isInline justify="space-between">
-        <Text alignSelf="center">
-          {page * PAGE_SIZE} of {products.length} products
+      <Stack isInline align="center" justify="space-between">
+        <Text color="gray.700" fontWeight="semibold">
+          {page * productsPerPage} of {products.length} products
         </Text>
 
         <Stack isInline>
-          <Image
-            cursor="pointer"
-            src="../assets/icons/arrow-right.svg"
-            onClick={() => setPage((p) => p + 1)}
-            display={PAGE_SIZE === products.length / page && "none"}
-          />
-          <Image
-            cursor="pointer"
-            src="../assets/icons/arrow-left.svg"
-            onClick={() => setPage((p) => p - 1)}
-            display={page === 1 && "none"}
-          />
+          {page !== 1 && (
+            <Image
+              cursor="pointer"
+              src="../assets/icons/arrow-left.svg"
+              onClick={() => setPage((p) => p - 1)}
+            />
+          )}
+          {productsPerPage !== products.length / page && (
+            <Image
+              cursor="pointer"
+              src="../assets/icons/arrow-right.svg"
+              onClick={() => setPage((p) => p + 1)}
+            />
+          )}
         </Stack>
       </Stack>
     </Stack>
