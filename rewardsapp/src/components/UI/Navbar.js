@@ -1,23 +1,19 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 import { Stack, Image, Text, Icon, Button } from "@chakra-ui/react";
 import { RepeatClockIcon } from "@chakra-ui/icons";
 
-import { api } from "../../api/api";
-import { UserContext } from "../../context/UserContext";
-
 import ModalCoins from "./ModalCoins";
+import { useUser } from "../../hooks/useUser";
+import { usePoints } from "../../hooks/usePoints";
 
 const Navbar = () => {
-  const { user, setUser } = useContext(UserContext);
+  const { name } = useUser();
+  const { points, addPoints, loading } = usePoints();
 
   const handleAddCoins = (point) => {
-    if (typeof point === "number") {
-      api
-        .addPoints(point)
-        .then((res) => setUser({ ...user, points: res["New Points"] }));
-    }
+    addPoints(point);
   };
 
   return (
@@ -39,12 +35,16 @@ const Navbar = () => {
           letterSpacing="-0.15px"
           lineHeight="48px"
         >
-          {user.name}
+          {name}
         </Text>
         <Button variant="link" as={Link} to="/redeems">
           <Icon as={RepeatClockIcon} color="secondary" height={10} width={10} />
         </Button>
-        <ModalCoins handleAddCoins={handleAddCoins} userPoints={user.points} />
+        <ModalCoins
+          handleAddCoins={handleAddCoins}
+          loading={loading}
+          userPoints={points}
+        />
       </Stack>
     </Stack>
   );
