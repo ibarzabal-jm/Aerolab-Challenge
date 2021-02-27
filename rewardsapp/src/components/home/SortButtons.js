@@ -1,38 +1,37 @@
 import React from "react";
-import { Stack, Text, Button, useBreakpointValue } from "@chakra-ui/react";
+import { Stack, Text, Box, useBreakpointValue } from "@chakra-ui/react";
 
 const SortButtons = ({ sortSelected, handleChange }) => {
-  const text = useBreakpointValue({ base: "", md: "Price" });
-  return (
-    <Stack isInline>
-      <Text display={{ base: "none", md: "block" }} alignSelf="center">
-        Sort By:
-      </Text>
+  const filter = [
+    { value: "recent", fullText: "Most Recent", mobile: "Recent" },
+    { value: "lowest", fullText: "Lowest Price", mobile: "Lowest" },
+    { value: "highest", fullText: "Highest Price", mobile: "Highest" },
+  ];
 
-      <Button
-        bg={sortSelected === "recent" ? "primary" : "#ededed"}
-        color={sortSelected === "recent" ? "white" : "#a3a3a3"}
-        rounded={999}
-        onClick={() => handleChange("recent")}
-      >
-        Most Recent
-      </Button>
-      <Button
-        bg={sortSelected === "lowest" ? "primary" : "#ededed"}
-        color={sortSelected === "lowest" ? "white" : "#a3a3a3"}
-        rounded={999}
-        onClick={() => handleChange("lowest")}
-      >
-        Lowest {text}
-      </Button>
-      <Button
-        bg={sortSelected === "highest" ? "primary" : "#ededed"}
-        color={sortSelected === "highest" ? "white" : "#a3a3a3"}
-        rounded={999}
-        onClick={() => handleChange("highest")}
-      >
-        Highest {text}
-      </Button>
+  const breakPoint = useBreakpointValue({ base: "base", sm: "small" });
+
+  return (
+    <Stack alignItems="center" direction={{ base: "column", sm: "row" }}>
+      <Text color="a3a3a3">Sort by:</Text>
+      <Stack direction="row" spacing={2}>
+        {filter.map((filter) => (
+          <Box
+            key={filter.value}
+            as="button"
+            bg={filter.value === sortSelected ? "primary" : "#ededed"}
+            color={filter.value === sortSelected ? "white" : "#a3a3a3"}
+            cursor="pointer"
+            paddingY={1}
+            paddingX={4}
+            rounded={999}
+            onClick={() => handleChange(filter.value)}
+          >
+            <Text>
+              {breakPoint === "base" ? filter.mobile : filter.fullText}
+            </Text>
+          </Box>
+        ))}
+      </Stack>
     </Stack>
   );
 };
