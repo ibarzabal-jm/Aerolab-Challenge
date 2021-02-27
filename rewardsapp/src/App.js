@@ -1,6 +1,11 @@
 import AppRouter from "./routers/AppRouter";
+import { BrowserRouter as Router } from "react-router-dom";
+
 import { Stack } from "@chakra-ui/react";
+
 import { UserProvider } from "./context/UserContext";
+import Navbar from "./components/UI/Navbar";
+import Footer from "./components/UI/Footer";
 
 const App = () => {
   return (
@@ -14,7 +19,11 @@ const App = () => {
         spacing={0}
         minH="100vh"
       >
-        <AppRouter />
+        <Router>
+          <Navbar />
+          <AppRouter />
+          <Footer />
+        </Router>
       </Stack>
     </UserProvider>
   );
