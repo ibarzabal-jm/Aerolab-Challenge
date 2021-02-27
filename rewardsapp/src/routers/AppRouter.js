@@ -16,9 +16,7 @@ const AppRouter = () => {
       <Navbar />
       <Switch>
         <Route path="/redeems" component={Redeems} />
-        <Route path="/home">
-          <Home />
-        </Route>
+        <Route path="/home" component={Home} />
         <Redirect to="/home" />
       </Switch>
       <Footer />
