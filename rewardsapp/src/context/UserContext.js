@@ -5,18 +5,30 @@ import { api } from "../api/api";
 export const UserContext = createContext();
 
 export const UserProvider = (props) => {
-  const [user, setUser] = useState({
-    name: "",
-    id: "",
-    points: 0,
-    redeemHistory: [],
-    createDate: "",
-  });
+  const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
+  const [pointsLoading, setPointsLoading] = useState(true);
+
+  const handleAddPoints = async (pointsToAdd) => {
+    setPointsLoading(true);
+    return api.addPoints(pointsToAdd).then((res) => {
+      setUser({ ...user, points: res["New Points"] });
+      setPointsLoading(false);
+    });
+  };
+
+  const handleRedeem = async (id, cost) => {
+    setPointsLoading(true);
+    return api.redeem(id).then(() => {
+      setUser({ ...user, points: user.points - cost });
+      setPointsLoading(false);
+    });
+  };
 
   useEffect(() => {
     api.getUser().then((user) => {
       setUser(user);
+      setPointsLoading(false);
       setLoading(false);
     });
   }, []);
@@ -37,7 +49,15 @@ export const UserProvider = (props) => {
   }
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider
+      value={{
+        user,
+        setUser,
+        addPoints: handleAddPoints,
+        redeem: handleRedeem,
+        pointsLoading,
+      }}
+    >
       {props.children}
     </UserContext.Provider>
   );
