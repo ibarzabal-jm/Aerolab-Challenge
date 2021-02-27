@@ -37,11 +37,13 @@ const Redeems = () => {
                   alignItems="center"
                   key={product.createDate}
                 >
-                  <Stack>
+                  <Stack h="100%">
                     <Image
                       alt={product.name}
                       src={product.img.hdUrl}
                       w="300px"
+                      objectFit="cover"
+                      h="100%"
                     ></Image>
                   </Stack>
                   <Stack w="100%" justify="center" spacing={0}>
