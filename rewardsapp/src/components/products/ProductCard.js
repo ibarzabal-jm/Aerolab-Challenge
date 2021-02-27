@@ -1,12 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Stack, Text, Image, Divider, TagLabel, Tag } from "@chakra-ui/react";
-import { UserContext } from "../../context/UserContext";
 import ProductHover from "./ProductHover";
+import { useUser } from "../../hooks/useUser";
 
 const ProductCard = ({ product }) => {
-  const {
-    user: { points },
-  } = useContext(UserContext);
+  const { points } = useUser();
 
   const { _id, name, cost, category, img } = product;
   const [hover, setHover] = useState(false);
