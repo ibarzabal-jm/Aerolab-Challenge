@@ -1,6 +1,6 @@
 const BASE_URL = "https://coding-challenge-api.aerolab.co/";
 const PERSONAL_TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMwMzYzNjdlNzE4NzAwMjBlMzhlZmIiLCJpYXQiOjE2MTM3NzIzNDJ9.qBWzR8anJgSzSk2qjE4lxBp1pwrSG9ddnVdNcUf1gS8";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDM5YTU4MzdlNzE4NzAwMjBlMzhmMzgiLCJpYXQiOjE2MTQzOTA2NTl9.NlvrjAXeR07dpRem3bRgZbNSvgfnnFMyAn-gHBzbfgw";
 
 const HEADER = {
   "Content-Type": "application/json",
