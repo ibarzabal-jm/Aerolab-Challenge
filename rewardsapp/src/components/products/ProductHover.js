@@ -34,6 +34,7 @@ const ProductHover = ({ id, cost }) => {
       left="0"
       bgGradient="linear(to-b, #0ad4faCC 0%, #25bbf1CC 100%)"
       height="100%"
+      rounded={4}
       opacity={0}
       padding={2.5}
       spacing={4}
