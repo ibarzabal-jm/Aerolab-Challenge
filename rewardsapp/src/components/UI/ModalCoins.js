@@ -11,9 +11,10 @@ import {
   PopoverBody,
   PopoverArrow,
   PopoverCloseButton,
+  CircularProgress,
 } from "@chakra-ui/react";
 
-const ModalCoins = ({ userPoints, handleAddCoins }) => {
+const ModalCoins = ({ userPoints, handleAddCoins, loading }) => {
   const poinstToAdd = [1000, 5000, 7500];
   const [isOpen, setIsOpen] = useState(false);
   const open = () => setIsOpen(!isOpen);
@@ -21,7 +22,13 @@ const ModalCoins = ({ userPoints, handleAddCoins }) => {
   return (
     <Popover>
       <PopoverTrigger>
-        <Button rounded={99} height="48px" onClick={open}>
+        <Button
+          rounded={99}
+          height="48px"
+          isLoading={loading}
+          spinner={<CircularProgress isIndeterminate color="secondary" />}
+          onClick={open}
+        >
           <Text
             fontSize="xl"
             color="#616161"
@@ -46,6 +53,7 @@ const ModalCoins = ({ userPoints, handleAddCoins }) => {
                 key={point}
                 rounded={99}
                 value={point}
+                disabled={loading}
                 color="#616161"
                 letterSpacing="-0.15px"
                 onClick={() => handleAddCoins(point)}
