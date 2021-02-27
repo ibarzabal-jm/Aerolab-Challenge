@@ -12,11 +12,10 @@ import ModalCoins from "./ModalCoins";
 const Navbar = () => {
   const { user, setUser } = useContext(UserContext);
 
-  const handleAddCoins = ({ target }) => {
-    const value = parseInt(target.value);
-    if (!isNaN(value)) {
+  const handleAddCoins = (point) => {
+    if (typeof point === "number") {
       api
-        .addPoints(value)
+        .addPoints(point)
         .then((res) => setUser({ ...user, points: res["New Points"] }));
     }
   };
