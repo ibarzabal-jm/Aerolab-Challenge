@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Stack, Heading, Text, Flex, Image, Grid } from "@chakra-ui/react";
-import { UserContext } from "../context/UserContext";
+import { useUser } from "../hooks/useUser";
 
 const Redeems = () => {
-  const { user } = useContext(UserContext);
+  const user = useUser();
 
   return (
     <Stack bg="#f9f9f9" minH="100vh" spacing={3}>
