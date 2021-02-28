@@ -69,7 +69,12 @@ const ProductHover = ({ id, cost }) => {
           />
         </Stack>
       </Stack>
-      <Button rounded={999} backgroundColor="white" onClick={redeemProduct}>
+      <Button
+        rounded={999}
+        backgroundColor="white"
+        isLoading={loading}
+        onClick={redeemProduct}
+      >
         Redeem now
       </Button>
     </Stack>
