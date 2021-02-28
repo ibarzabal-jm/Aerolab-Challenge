@@ -19,8 +19,8 @@ const ProductHover = ({ id, cost }) => {
     } else {
       Swal.fire({
         icon: "error",
-        title: "Crap...",
-        text: "You can't redeem now",
+        title: "Can't redeem",
+        text: "You can't redeem now, await actual redeem",
       });
     }
   };
