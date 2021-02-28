@@ -1,6 +1,7 @@
 import { Stack, Heading, Image } from "@chakra-ui/react";
 import React, { useState, createContext, useEffect } from "react";
 import { api } from "../api/api";
+import Swal from "sweetalert2";
 
 export const UserContext = createContext();
 
@@ -19,9 +20,20 @@ export const UserProvider = (props) => {
 
   const handleRedeem = async (id, cost) => {
     setPointsLoading(true);
-    return api.redeem(id).then(() => {
-      setUser({ ...user, points: user.points - cost });
-      setPointsLoading(false);
+    return api.redeem(id).then(({ message }) => {
+      if (message) {
+        api
+          .getUser()
+          .then((user) => setUser(user))
+          .then(setPointsLoading(false));
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Crap...",
+          text: "You can't redeem now, report with admin",
+        });
+        setLoading(false);
+      }
     });
   };
 
