@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {  Stack } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 import Header from "../components/home/Header";
 import ProductList from "../components/home/ProductList";
 import ProductListSkeleton from "../components/home/ProductListSkeleton";
