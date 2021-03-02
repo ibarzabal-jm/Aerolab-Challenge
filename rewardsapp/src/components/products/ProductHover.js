@@ -5,17 +5,13 @@ import { usePoints } from "../../hooks/usePoints";
 import Swal from "sweetalert2";
 
 const ProductHover = ({ id, cost }) => {
+
+  
   const { redeem, loading } = usePoints();
 
   const redeemProduct = () => {
     if (!loading) {
-      redeem(id, cost).then(() => {
-        Swal.fire({
-          icon: "success",
-          title: "Product Buy!",
-          text: "Wiiiii",
-        });
-      });
+      redeem(id, cost);
     } else {
       Swal.fire({
         icon: "error",
