@@ -18,21 +18,29 @@ export const UserProvider = (props) => {
     });
   };
 
-  const handleRedeem = async (id, cost) => {
+  const handleRedeem = async (id) => {
     setPointsLoading(true);
-    return api.redeem(id).then(({ message }) => {
+    return api.redeem(id).then(({ message, error }) => {
       if (message) {
         api
           .getUser()
           .then((user) => setUser(user))
-          .then(setPointsLoading(false));
+          .then(() => {
+            setPointsLoading(false);
+            Swal.fire({
+              icon: "success",
+              title: "Product Buy!",
+              text: "Wiiiii",
+            });
+          });
       } else {
         Swal.fire({
           icon: "error",
           title: "Crap...",
           text: "You can't redeem now, report with admin",
+          footer: error,
         });
-        setLoading(false);
+        setPointsLoading(false);
       }
     });
   };
@@ -64,7 +72,6 @@ export const UserProvider = (props) => {
     <UserContext.Provider
       value={{
         user,
-        setUser,
         addPoints: handleAddPoints,
         redeem: handleRedeem,
         pointsLoading,
