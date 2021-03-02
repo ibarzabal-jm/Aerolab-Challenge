@@ -34,7 +34,11 @@ const ProductList = ({ products, productsPerPage }) => {
           <Text color="gray.700" fontWeight="semibold">
             {page * productsPerPage} of {products.length} products
           </Text>
-          <Divider orientation="vertical" />
+          <Divider
+            display={["none", "initial"]}
+            h="32px"
+            orientation="vertical"
+          />
           <SortButtons
             sortSelected={sortSelected}
             handleChange={handleSortChange}
@@ -73,10 +77,11 @@ const ProductList = ({ products, productsPerPage }) => {
             <motion.div
               animate="visible"
               key={product._id}
+              layout
               custom={index}
               initial="hidden"
               variants={{
-                hidden: { opacity: 0, y: 150 },
+                hidden: { opacity: 0, y: 100 },
                 visible: (index) => ({
                   opacity: 1,
                   y: 0,
