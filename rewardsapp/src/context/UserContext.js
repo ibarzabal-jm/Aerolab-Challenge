@@ -1,7 +1,7 @@
-import { Stack, Heading, Image } from "@chakra-ui/react";
 import React, { useState, createContext, useEffect } from "react";
 import { api } from "../api/api";
 import Swal from "sweetalert2";
+import LoadingPage from "../components/UI/LoadingPage";
 
 export const UserContext = createContext();
 
@@ -54,18 +54,7 @@ export const UserProvider = (props) => {
   }, []);
 
   if (!user || loading) {
-    return (
-      <Stack
-        bg="primary"
-        justify="center"
-        align="center"
-        height="100vh"
-        width="100vw"
-      >
-        <Image src="../assets/logo.svg" w={20} h="{20" />
-        <Heading textAlign="center">Loading...</Heading>
-      </Stack>
-    );
+    return <LoadingPage />;
   }
 
   return (
